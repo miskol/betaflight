@@ -20,24 +20,23 @@
 
 #include <platform.h>
 
-#ifdef TARGET_CONFIG
-#include "common/utils.h"
-
-#include "drivers/io.h"
-
-#include "fc/rc_controls.h"
-
-#include "flight/failsafe.h"
-#include "flight/mixer.h"
-#include "flight/pid.h"
-
-#include "rx/rx.h"
-
-#include "config/config_profile.h"
 #include "config/config_master.h"
 
+#define VBAT_SCALE       113
+#define CURRENT_SCALE    1000
+#define CURRENT_OFFSET   0
+
+#define OSD_POS(x,y)  (x | (y << 5))
+
+#ifdef TARGET_CONFIG
 void targetConfiguration(master_t *config)
 {
-    config->batteryConfig.currentMeterScale = 220;
+    config->batteryConfig.vbatscale = VBAT_SCALE;
+    config->batteryConfig.currentMeterScale = CURRENT_SCALE;
+    config->batteryConfig.currentMeterOffset = CURRENT_OFFSET;
+    config->barometerConfig.baro_hardware = 0;
+    config->compassConfig.mag_hardware = 0;
+// Disabled to make it build for 3.1.7
+//    config->osdConfig.item_pos[OSD_MAIN_BATT_VOLTAGE] = OSD_POS(12, 1) | VISIBLE_FLAG;
 }
 #endif

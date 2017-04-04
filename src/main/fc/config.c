@@ -135,10 +135,10 @@ static void resetPidProfile(pidProfile_t *pidProfile)
 {
     pidProfile->P8[ROLL] = 44;
     pidProfile->I8[ROLL] = 40;
-    pidProfile->D8[ROLL] = 20;
+    pidProfile->D8[ROLL] = 30;
     pidProfile->P8[PITCH] = 58;
     pidProfile->I8[PITCH] = 50;
-    pidProfile->D8[PITCH] = 22;
+    pidProfile->D8[PITCH] = 35;
     pidProfile->P8[YAW] = 70;
     pidProfile->I8[YAW] = 45;
     pidProfile->D8[YAW] = 20;
@@ -174,12 +174,12 @@ static void resetPidProfile(pidProfile_t *pidProfile)
     pidProfile->pidAtMinThrottle = PID_STABILISATION_ON;
     pidProfile->levelAngleLimit = 55;
     pidProfile->levelSensitivity = 55;
-    pidProfile->setpointRelaxRatio = 20;
-    pidProfile->dtermSetpointWeight = 100;
+    pidProfile->setpointRelaxRatio = 100;
+    pidProfile->dtermSetpointWeight = 60;
     pidProfile->yawRateAccelLimit = 10.0f;
     pidProfile->rateAccelLimit = 0.0f;
     pidProfile->itermThrottleThreshold = 350;
-    pidProfile->itermAcceleratorGain = 1.0f;
+    pidProfile->itermAcceleratorGain = 3.0f;
 }
 
 void resetProfile(profile_t *profile)
@@ -875,7 +875,7 @@ void createDefaultConfig(master_t *config)
 
     config->rxConfig.rssi_channel = 0;
     config->rxConfig.rssi_scale = RSSI_SCALE_DEFAULT;
-    config->rxConfig.rssi_ppm_invert = 0;
+    config->rxConfig.rssi_invert = 0;
     config->rxConfig.rcInterpolation = RC_SMOOTHING_AUTO;
     config->rxConfig.rcInterpolationChannels = 0;
     config->rxConfig.rcInterpolationInterval = 19;

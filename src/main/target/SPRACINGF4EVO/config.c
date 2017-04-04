@@ -20,10 +20,11 @@
 
 #include <platform.h>
 
-#ifdef TARGET_CONFIG
-#include "common/utils.h"
+#include "common/axis.h"
 
-#include "drivers/io.h"
+#include "drivers/sensor.h"
+#include "drivers/compass.h"
+#include "drivers/serial.h"
 
 #include "fc/rc_controls.h"
 
@@ -33,11 +34,31 @@
 
 #include "rx/rx.h"
 
-#include "config/config_profile.h"
-#include "config/config_master.h"
+#include "io/serial.h"
 
+#include "telemetry/telemetry.h"
+
+#include "sensors/sensors.h"
+#include "sensors/compass.h"
+#include "sensors/barometer.h"
+
+#include "config/config_master.h"
+#include "config/feature.h"
+
+#include "fc/config.h"
+
+#ifdef TARGET_CONFIG
 void targetConfiguration(master_t *config)
 {
-    config->batteryConfig.currentMeterScale = 220;
+    UNUSED(config);
+
+    barometerConfig()->baro_hardware = BARO_DEFAULT;
+    rxConfig()->sbus_inversion = 1;
+    serialConfig()->portConfigs[1].functionMask = FUNCTION_MSP; // So SPRacingF3OSD users don't have to change anything.
+    serialConfig()->portConfigs[findSerialPortIndexByIdentifier(SERIALRX_UART)].functionMask = FUNCTION_RX_SERIAL;
+    serialConfig()->portConfigs[findSerialPortIndexByIdentifier(TELEMETRY_UART)].functionMask = FUNCTION_TELEMETRY_SMARTPORT;
+    telemetryConfig()->telemetry_inversion = 0;
+    telemetryConfig()->sportHalfDuplex = 0;
+
 }
 #endif

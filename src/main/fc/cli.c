@@ -144,7 +144,7 @@ static const char * const featureNames[] = {
     "SONAR", "TELEMETRY", "CURRENT_METER", "3D", "RX_PARALLEL_PWM",
     "RX_MSP", "RSSI_ADC", "LED_STRIP", "DISPLAY", "OSD",
     "BLACKBOX", "CHANNEL_FORWARDING", "TRANSPONDER", "AIRMODE",
-    "SDCARD", "VTX", "RX_SPI", "SOFTSPI", "ESC_SENSOR", NULL
+    "SDCARD", "VTX", "RX_SPI", "SOFTSPI", "ESC_SENSOR", "FEATURE_ANTI_GRAVITY", NULL
 };
 
 // sync this with rxFailsafeChannelMode_e
@@ -502,7 +502,7 @@ const clivalue_t valueTable[] = {
     { "rc_interp",                  VAR_UINT8  | MASTER_VALUE | MODE_LOOKUP, &rxConfig()->rcInterpolation, .config.lookup = { TABLE_RC_INTERPOLATION } },
     { "rc_interp_ch",               VAR_UINT8  | MASTER_VALUE | MODE_LOOKUP, &rxConfig()->rcInterpolationChannels, .config.lookup = { TABLE_RC_INTERPOLATION_CHANNELS } },
     { "rc_interp_int",              VAR_UINT8  | MASTER_VALUE,  &rxConfig()->rcInterpolationInterval, .config.minmax = { 1,  50 } },
-    { "rssi_ppm_invert",            VAR_INT8   | MASTER_VALUE | MODE_LOOKUP,  &rxConfig()->rssi_ppm_invert, .config.lookup = { TABLE_OFF_ON } },
+    { "rssi_invert",                VAR_INT8   | MASTER_VALUE | MODE_LOOKUP,  &rxConfig()->rssi_invert, .config.lookup = { TABLE_OFF_ON } },
 #if defined(USE_PWM)
     { "input_filtering_mode",       VAR_INT8   | MASTER_VALUE | MODE_LOOKUP,  &pwmConfig()->inputFilteringMode, .config.lookup = { TABLE_OFF_ON } },
 #endif
